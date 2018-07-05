@@ -27,6 +27,8 @@ session_start();
   <link rel="stylesheet" href="../css/_all-skins.min.css">
   <!-- Custom -->
   <link rel="stylesheet" href="../css/custom.css">
+     <link rel="stylesheet" href="styles.css">
+    <link href="bootstrap.css" rel="stylesheet" type="text/css">
 
   <script src="../js/tinymce/tinymce.min.js"></script>
 
@@ -44,8 +46,48 @@ session_start();
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class=" hirebody hold-transition skin-green sidebar-mini" >
+    <div class="container-fluid">
+   
 
+    <nav class="navbar navbar-inverse sticky-top" style="width:100%" id="main-nav">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Outsource</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="index.php">Home</a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#"></a></li>
+         
+          <li><a href="#"></a></li>
+          <li><a href="contactus.html"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+          <li><a href="#"></a></li>
+
+         
+          <li class="active"><a href="#">Hiring?</a></li>
+
+        </ul>
+      </div>
+
+    </nav>
+ 
 
   <!-- Content Wrapper. Contains page content -->
             <div class="form-style-5">
@@ -75,12 +117,12 @@ session_start();
                     <input type="text" class="form-control  input-lg" id="qualification" name="qualification" placeholder="Qualification Required" required="">
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-flat btn-success">Create</button>
+                    <button type="submit" id="createjob"class="btn btn-flat btn-success">Create</button>
                   </div>
                 </div></div>
                  </fieldset>
                 </form></div>
-         
+    </div>
               
         
   

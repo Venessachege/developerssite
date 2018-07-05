@@ -17,7 +17,7 @@
 <!--      Cool buttons -->
       <link rel="stylesheet" type="text/css" href="cool-buttons/css/normalize.css" />
       <link rel="stylesheet" type="text/css" href="cool-buttons/css/main.css" />
-      
+    
   </head>
 
   <body >
@@ -64,21 +64,27 @@
       </div>
 
     </nav>
+      
+<!--
+      <div class="response alert alert-info">
+          
+      </div>
+-->
       <?php
         require_once('connection.php');
 
 
         //get results from database
-            if(isset($_GET['lang'])){
+            if(isset($_GET['view'])){
                 $language = urlencode($_GET['lang']);
 
-                $result =$mysqli->query("SELECT * FROM jobs ;") OR die($mysqli->error);
+                $result =$mysqli->query("SELECT `jobtitle`, `description`, `minimumsalary`, `maximumsalary`, `experience`, `qualification`,`posterId` FROM jobs ;") OR die($mysqli->error);
                 $all_property = array();  //declare an array for saving property
 
                 //showing property
                 
-                echo '<table class="data-table table table-stripped ">
-                        <thead class="data-heading">';  //initialize table tag
+                echo '<table class="data-table table table-stripped  ">
+                        <thead class="data-heading thead-light" style="color:red;">';  //initialize table tag
                 while ($property = mysqli_fetch_field($result)) {
                     echo '<td> ' . $property->name . '</td>';  //get field name for header
                     array_push($all_property, $property->name);  //save those to array

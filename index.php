@@ -85,7 +85,9 @@
           <p class="fcontent" id="about" style=" margin-top:40px;margin-left:570px;color:green;font-size:20px;">ABOUT</P>
             <p class="fcontent"  style="margin-left:100px;margin-top:50px;">Outsourcers is a world class app that strives to connect millions of developers to employers
               who offer world class jobs with good remuneration.By signing up to our app you are guaranteed exposure to thousands of employers all over the globe.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-      </div class="container">
+        </div>
+    </div>
+    <div class="container">
       <div class="row">
         <h2 class="fcontent" style="margin-left:500px;color:green;margin-top:80px;">Testimonials</h2>
       </div>
@@ -105,53 +107,19 @@
         </div>
       </div>
 	  <div>
-        <div class="row">
-<div id="contact" class="text-center">
-  <div class="container">
-    <div class="section-title center">
-      <h2>Get In Touch</h2>
-      <hr>
-      
-    </div>
-    <div class="col-md-8 col-md-offset-2">
-      <form name="sentMessage" id="contactForm" novalidate action="mail.php">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <input type="text" id="name" class="form-control" placeholder="Name" required="required">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <input type="email" id="email" class="form-control" placeholder="Email" required="required">
-              <p class="help-block text-danger"></p>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <textarea name="message" id="message" class="form-control" rows="4" placeholder="Message" required></textarea>
-          <p class="help-block text-danger"></p>
-        </div>
-        <div id="success"></div>
-        <button type="submit" class="btn btn-custom btn-lg">Send Message</button>
-      </form>
-     
-    </div>
-  </div>
-</div>
-
-
-
-	 
-</div>
+        
    <div class="row">
    <div class="col-md-12">
-    <p style="margin-left:450px">Copyright © 2018</p>
-	</div>
+       <footer>
+           <p style="margin-left:450px">Copyright © 2018</p>
+	
+       
+       </footer>
+       </div>
   </div>
-    </div>
-
+        </div>
+</div>
+  
 </body>
 
 </html>

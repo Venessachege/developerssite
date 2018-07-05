@@ -7,17 +7,18 @@
             $email = $mysqli->real_escape_string($_POST['email']);
             $password = $mysqli->real_escape_string($_POST['password']);
 
-            $query="SELECT `email`,`password` FROM developers where `email` ='$email';";
+            $query="SELECT * FROM developers where `email` ='$email';";
             $result = $mysqli->query($query) OR die($mysqli->error);
             if($result->num_rows > 0){
                 $row = $result->fetch_assoc();
                 $pass = $row['password'];
                 $match = password_verify($password,$pass);
                 if($match){
-                    $_SESSION['id'] = $row['userId'];
+                    $_SESSION['id'] = $row['ID'];
+                    $_SESSION['userEmail'] = $row['email'];
                     $_SESSION['loggedIn'] = true;
                     
-                    header('Location: signup.php');
+                    header('Location: dashboard.php');
                 }
                 else{
                     echo "Passwords do not match";

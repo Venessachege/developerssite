@@ -47,7 +47,7 @@ $confirmpassword = $mysqli->real_escape_string($_REQUEST['confirmpassword']);
 else {
 	$sql = "INSERT INTO developers (first_name,last_name,email,location,languages,skill,password) VALUES ('$first_name','$last_name','$email','$location','$languages','$skill','$hashedpassword')";
  if($mysqli->query($sql) === true){
-   echo "Records inserted successfully.";
+   header('Location: index.php');
  } else{
     echo "ERROR: Could not able to execute $sql. " . $mysqli->error;
 }

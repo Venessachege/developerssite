@@ -34,7 +34,7 @@
           <li><a href="#"></a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#"></a></li>
-          <li><a href="postjobs.php">ContactUs</a></li>
+         
           <li><a href="#"></a></li>
           <li><a href="contactus.html"></a></li>
           <li><a href="#"></a></li>
@@ -58,7 +58,7 @@
               
               
           <li><a href="signup.php">Register</a></li>
-          <li class="active"><a href="#">Hiring?</a></li>
+          <li class="active"><a href="hire.php">Hiring</a></li>
 
         </ul>
       </div>
@@ -90,7 +90,7 @@
             <img src="images/card1image.jpg" style="width:315px">
           <p style="color:white">I am a very simple card. I am good at containing small bits of information.
           I am convenient because I require little markup to use effectively.</p>
-            <button class="button"><a href="viewjobs.php">VIEW JOB</button></a>
+            <button class="button"><a href="viewjobs.php?view=1">VIEW JOB</button></a>
 
         </div>
        

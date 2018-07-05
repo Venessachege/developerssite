@@ -352,7 +352,7 @@ h1 {
     border-style: dotted;
 }
 .hirebody{
-background-color: #151616
+background-color: #151616;
 }
 
 //profile card css
@@ -527,11 +527,24 @@ svg .polygon{
     margin: 0 auto;
     margin-top: 100px;
     width: 90% !important;
+    background-color: #151616;
 }
+
+tr td{
+    color: whitesmoke;
+    padding: 10px;
+}
+
 thead td{
     text-transform: uppercase;
     color: red;
+    background-color: #151616;
 }
+
+.data-table thead {
+    background-color: white;
+}
+
 .card1{
     margin-left: 20px;
     margin-top: inherit;
@@ -680,4 +693,24 @@ thead td{
 .form-style-5 input[type="button"]:hover
 {
     background: black;
+}
+.table-inverse{
+    background-color: #151616;
+}
+footer{
+    background-color: black;
+    color: white;
+    width:100%;
+}
+
+.apply {
+    width: 53%;
+    margin-left: 20px;
+}
+
+.response {
+    height: 100px;
+    width: 200px;
+    padding: 20px;
+    margin: 0 auto;
 }
