@@ -1,0 +1,120 @@
+var ForegroundProperties = {
+	feathering: "feathering",
+}
+
+function ForegroundLayer(imageLayer, maskLayer, mattingLayer, layerId, data) {
+	Layer.apply(this, [imageLayer.size(), layerId, data]);
+
+	this.imageLayer = imageLayer;
+	this.maskLayer = maskLayer;
+	this.mattingLayer = mattingLayer;
+
+	this.maskLayer.layerChangedEvent.attach(maskChanged.bind(this));
+	this.mattingLayer.layerChangedEvent.attach(mattingChanged.bind(this));
+
+	function maskChanged(){
+		this.drawLayer();
+	}
+	
+	function drawTrimap(){
+		var size = imageLayer.size();
+		var canvas = document.createElement('canvas');
+		canvas.width = size.width;
+		canvas.height = size.height;
+		var ctx = canvas.getContext("2d");
+		ctx.drawImage(maskLayer._canvas, 0, 0);
+		ctx.drawImage(mattingLayer._canvas, 0, 0);
+		return canvas.toDataURL("image/png");
+
+	}
+	function mattingChanged(){
+		return;
+		if(this.mattingLayer.contentRect.isEmpty())
+			return;
+
+		//run server processing
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST',window.editor.model.url() + "/matting", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if(xhr.status == 200) {
+					//self.contours = JSON.parse(xhr.responseText);
+					//self.drawLayer();
+				} else {
+					//show error
+				}
+			}
+		}
+		var data = drawTrimap();
+		xhr.send("mask=" + encodeURIComponent(data));
+	}
+}
+
+ForegroundLayer.prototype = Object.create(Layer.prototype);
+ForegroundLayer.prototype.constructor = ForegroundLayer;
+ForegroundLayer.prototype.propertyChanged = function(id){
+	switch(id)
+	{
+		case ForegroundProperties.feathering:
+			this.drawLayer();
+			break;
+	}
+}
+
+ForegroundLayer.prototype.drawLayer = function() {
+
+	if(this.maskLayer.contentRect.isEmpty())
+		return;
+
+	// if matting.contentRect() is not null, run drawLayer on server
+	var ctx = this._canvas.getContext("2d");
+	ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+	
+	//TODO: get image data only for mask rect
+	var size = this.imageLayer.size();
+	var feathering = this._properties[ForegroundProperties.feathering];
+
+	//var maskData = this.maskLayer._canvas.getContext("2d").getImageData(0,0,size.width,size.height);
+	//blurImageData(maskData,0,0,size.width, size.height,feathering);
+	var self = this;
+
+	function process(maskData){
+		
+		var fgData = ctx.getImageData(0,0,size.width,size.height);
+		var imgData = self.imageLayer._canvas.getContext("2d").getImageData(0,0,size.width,size.height);
+		
+		for (var i=0;i<imgData.data.length;i+=4)
+		{
+			fgData.data[i] = imgData.data[i];
+			fgData.data[i+1] = imgData.data[i+1];
+			fgData.data[i+2] = imgData.data[i+2];
+	
+			fgData.data[i+3] = maskData.data[i];
+		}
+		//if(!self.mattingLayer.contentRect().isEmpty()){ run matting; }
+		ctx.putImageData(fgData,0,0);
+		self.layerChangedEvent.notify();
+	}
+	var maskImageData = this.maskLayer._canvas.getContext("2d").getImageData(0,0,size.width,size.height);
+	if(feathering > 0){
+		var worker = new Worker('/js/blur_worker.js');
+		worker.postMessage({
+			imagedata: maskImageData, 
+			width: size.width,
+			height: size.height,
+			radius: feathering
+		});
+
+		worker.onmessage = function (event) {
+			if (event.data.status === 'complete') {
+				process(event.data.imagedata);
+			} else {
+				//event.data.progress + "%";
+			}
+		}
+	}
+	else{
+		process(maskImageData);
+	}
+}

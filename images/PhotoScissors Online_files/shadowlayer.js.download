@@ -1,0 +1,97 @@
+var ShadowProperties = {
+	color: "color",
+	blurRadius: "blurRadius",
+}
+
+function ShadowLayer(maskLayer, layerId, data) {
+	Layer.apply(this, [maskLayer.size(), layerId, data]);
+	this.maskLayer = maskLayer;
+	//offset shadow
+	this._properties[LayerProperties.boundingRect].x+=10;
+	this._properties[LayerProperties.boundingRect].y+=10;
+
+	this.maskLayer.layerChangedEvent.attach(maskChanged.bind(this));
+	
+	function maskChanged(){
+		this.drawLayer();
+	}
+	
+}
+
+function hexToRgb(hex) {
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
+
+ShadowLayer.prototype = Object.create(Layer.prototype);
+ShadowLayer.prototype.constructor = ShadowLayer;
+ShadowLayer.prototype.propertyChanged = function(id){
+	switch(id)
+	{
+		case ShadowProperties.color:
+		case ShadowProperties.blurRadius:
+			this.drawLayer();
+			break;
+		case LayerProperties.opacity:
+		case LayerProperties.enabled:
+			this.view.update();
+			break;
+
+	}
+}
+ShadowLayer.prototype.drawLayer = function(){
+	if(this.maskLayer.contentRect.isEmpty() /* || this.isEnabled() == false*/)
+		return;
+
+	this.beginWorkEvent.notify();
+	var br = this._properties[ShadowProperties.blurRadius];
+	var shadowColor = this._properties[ShadowProperties.color];
+	var size = this.maskLayer.size();
+	
+	var sw = size.width + 2*br;
+	var sh = size.height + 2*br;
+
+	if(this._canvas.width != sw || this._canvas.height != sh){
+		this.createCanvas(sw, sh);
+	}
+
+	var ctx = this._canvas.getContext("2d");
+	ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+	ctx.drawImage(this.maskLayer._canvas, br, br);
+	//var shadowData = ctx.getImageData(0,0,sw,sh);
+	//blurImageData(shadowData,0,0,sw, sh,br);
+	var self = this;
+	var worker = new Worker('/js/blur_worker.js');
+	worker.postMessage({
+		imagedata: ctx.getImageData(0,0,sw,sh), 
+		width: sw,
+		height: sh,
+		radius: br
+	});
+
+	worker.onmessage = function (event) {
+		if (event.data.status === 'complete') {
+			var color = hexToRgb(shadowColor);
+			var shadowData = event.data.imagedata;
+			for (var i=0;i<shadowData.data.length;i+=4)
+			{
+				shadowData.data[i+3] = shadowData.data[i];
+				
+				shadowData.data[i] = color.r;
+				shadowData.data[i+1] = color.g;
+				shadowData.data[i+2] = color.b;
+			}
+			ctx.putImageData(shadowData,0,0);
+			self.layerChangedEvent.notify();
+			self.endWorkEvent.notify();
+		} else {
+			// event.data.progress + "%";
+		}
+	}
+
+	
+}

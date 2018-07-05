@@ -1,0 +1,134 @@
+var MaskProperties = {
+	offset: "offset",
+	smooth: "smooth",
+}
+
+function MaskLayer(imageLayer, scribbleLayer, layerId, data) {
+	ScribbleLayer.apply(this, [imageLayer.size(), layerId, data]);
+	var self = this;
+	this.contours = [];
+	this.imageLayer = imageLayer;
+	this.scribbleLayer = scribbleLayer;
+
+	this.scribbleLayer.layerChangedEvent.attach(scribbleChanged.bind(this));
+
+	function checkScribble(canvas) {
+		var imgData = canvas.getContext("2d").getImageData(0,0,canvas.width,canvas.height);
+		var bg = false, fg = false;
+		for (var i=0;i<imgData.data.length;i+=4)
+		{
+			if(imgData.data[i + 0]) // red
+				bg = true;
+			
+			if(imgData.data[i + 1]) //green
+				fg = true;
+			
+			if(bg && fg)
+				return true;
+		}
+		return false;
+	}
+	
+	function scribbleChanged(){
+		if(this.scribbleLayer.contentRect.isEmpty())
+			return;
+
+		if(!checkScribble(this.scribbleLayer._canvas))
+			return;
+
+		this.process(self.scribbleLayer._canvas.toDataURL("image/png"));
+	}
+}
+
+MaskLayer.prototype = Object.create(ScribbleLayer.prototype);
+MaskLayer.prototype.constructor = MaskLayer;
+MaskLayer.prototype.render = function (ctx) {
+
+	if(this._canvas && this.isEnabled()) {
+		ctx.strokeStyle="yellow";
+		ctx.lineWidth = 2/ this.view.getScale();
+		this.contours.forEach(function(contour){
+			if(contour.points.length < 1)
+				return;
+
+			ctx.beginPath();
+	
+			ctx.moveTo( contour.points[0][0],
+						contour.points[0][1]);
+			
+			for(var j =1;j<contour.points.length;j++) {
+				ctx.lineTo( contour.points[j][0],
+							contour.points[j][1]);
+			}
+			ctx.stroke();	
+		}, this);
+	}
+}
+MaskLayer.prototype.propertyChanged = function(id){
+	switch(id)
+	{
+		case MaskProperties.offset:
+		case MaskProperties.smooth:
+			this.process();
+			break;
+	}
+}
+MaskLayer.prototype.process = function(mask){
+	var self = this;
+	this.beginWorkEvent.notify();
+	//run server processing
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', window.editor.model.url() + "/process", true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if(xhr.status == 200) {
+				self.contours = JSON.parse(xhr.responseText);
+				self.drawLayer();
+			} else {
+				//show error
+			}
+			self.endWorkEvent.notify();
+		}
+	}
+	var data = "offset="+self.property(MaskProperties.offset)+"&smooth="+self.property(MaskProperties.smooth);
+	
+	if(mask)
+		data+='&mask=' + encodeURIComponent(mask);
+
+	xhr.send(data);
+}
+MaskLayer.prototype.drawLayer = function(){
+	var ctx = this._canvas.getContext("2d");
+	ctx.fillStyle = "black";
+	ctx.fillRect(0,0,this._canvas.width,this._canvas.height);
+
+	this.contentRect = new Rect();
+	this.contours.forEach(function(contour){
+		if(contour.points.length < 1)
+			return;
+
+		var rect = new Rect();
+		rect.initFromPoints(contour.points);
+		
+		this.contentRect.unite(rect);
+
+		if(contour.hole) {
+			ctx.fillStyle = "black";
+		} else {
+			ctx.fillStyle = "white";
+		}
+		ctx.beginPath();
+
+		ctx.moveTo( contour.points[0][0],
+					contour.points[0][1]);
+		
+		for(var j =1;j<contour.points.length;j++) {
+			ctx.lineTo( contour.points[j][0],
+						contour.points[j][1]);
+		}
+		ctx.fill();
+	},this);
+
+	this.layerChangedEvent.notify();
+}

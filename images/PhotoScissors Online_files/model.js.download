@@ -1,0 +1,106 @@
+var LayerNames = {
+	ImageLayer: "image",
+	ScribbleLayer: "scribble",
+	ForegroundLayer: "foreground",
+	BackgroundLayer: "background",
+	ShadowLayer: "shadow",
+	MaskLayer: "mask",
+	MattingLayer: "matting",
+}
+
+function Model(id, secret){
+	this.id = id;
+	this.secret = secret;
+	var data = null;
+	var self = this;
+	this.url = function(){
+		return "/" + this.id + "/"+this.secret;
+	}
+	this.modelLoadedEvent = new Event(this);
+	var layers = {};
+	this.undoStack = new UndoStack(this);
+	this.undoStack.indexChangedEvent.attach(undoStackChanged.bind(this));
+
+	var image = new Image();
+	image.crossOrigin = "Anonymous";
+	image.onload = imageLoaded.bind(this);
+	image.onerror = (() => { showMessage("Error", "Load Image Failed!");});
+	image.src = this.url() + "/image";
+
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', this.url() + "/model", true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState != 4) 
+			return;
+	
+		if (xhr.status != 200) {
+			showMessage("Error", "Load Model Failed!");
+		} else {
+			notifyWhenLoaded();
+		}
+	}
+	xhr.send();
+	
+	this.imageSize = function() {
+		return {width:image.width, height: image.height};
+	}
+	function notifyWhenLoaded(){
+		if(image.complete && (xhr.readyState == 4 && xhr.status == 200)) {
+			//create model
+			data = JSON.parse(xhr.responseText);
+
+			var size = {width: image.width, height: image.height};
+			
+			var imageLayer = new ImageLayer(image, LayerNames.ImageLayer, data[LayerNames.ImageLayer]);
+			var scribbleLayer = new ScribbleLayer(size, LayerNames.ScribbleLayer, data[LayerNames.ScribbleLayer]);
+			var mattingLayer = new ScribbleLayer(size, LayerNames.MattingLayer, data[LayerNames.MattingLayer]);
+			var maskLayer = new MaskLayer(imageLayer, scribbleLayer, LayerNames.MaskLayer, data[LayerNames.MaskLayer]);
+
+			var foregroundLayer = new ForegroundLayer(imageLayer, maskLayer, mattingLayer, LayerNames.ForegroundLayer, data[LayerNames.ForegroundLayer]);
+			var backgroundLayer = new BackgroundLayer(imageLayer, maskLayer, LayerNames.BackgroundLayer, data[LayerNames.BackgroundLayer]);
+			var shadowLayer = new ShadowLayer(maskLayer, LayerNames.ShadowLayer, data[LayerNames.ShadowLayer]);
+
+			addLayer(imageLayer);
+			addLayer(scribbleLayer);
+			addLayer(mattingLayer);
+			addLayer(maskLayer);
+			
+			addLayer(backgroundLayer);
+			addLayer(shadowLayer);
+			addLayer(foregroundLayer);
+
+			self.modelLoadedEvent.notify();
+
+			scribbleLayer.drawLayer();
+		}
+	}
+	function addLayer(layer){
+		layers[layer.layerId()] = layer;
+	}
+
+	function imageLoaded() {
+		notifyWhenLoaded();
+	}
+
+	this.layer = function(name) {
+		return layers[name];
+	}
+	function undoStackChanged(){
+
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', window.editor.model.url() + "/model", true);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4) {
+				if(xhr.status == 200) {
+				} else {
+					//show error
+				}
+				
+			}
+		}
+		data[LayerNames.BackgroundLayer][BackgroundProperties.image] = "";
+		
+		xhr.send(JSON.stringify(data));
+	}
+}

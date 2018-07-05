@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://online.photoscissors.com/558833/rky3Dv6bX/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>PhotoScissors Online</title>
+		<link rel="shortcut icon" href="https://online.photoscissors.com/favicon.ico" type="image/x-icon">
+		
+		<meta name="description" content="PhotoScissors Online">
+		<meta name="keywords" content="PhotoScissors online">
+
+		<link href="./PhotoScissors Online_files/font-awesome.min.css" rel="stylesheet"> 
+		<link href="./PhotoScissors Online_files/bootstrap.min.css" rel="stylesheet">
+		<link href="./PhotoScissors Online_files/stylesheet.css" rel="stylesheet" type="text/css">
+		<link href="./PhotoScissors Online_files/editor.css" rel="stylesheet">
+	</head>
+	<body class="">
+	
+			<div id="wrapper" class="toggled">
+				
+					<div id="sidebar-wrapper" style="background-color:white !important;">
+						
+						<ul class="nav nav-tabs nav-justified">
+							<li class="active"><a data-act="selectResultLayer" data-arg="foreground" data-toggle="tab" href="https://online.photoscissors.com/558833/rky3Dv6bX/#foreground"><img src="./PhotoScissors Online_files/foreground.svg"></a></li>
+							<li><a data-act="selectResultLayer" data-arg="background" data-toggle="tab" href="https://online.photoscissors.com/558833/rky3Dv6bX/#background"><img src="./PhotoScissors Online_files/background.svg"></a></li>
+							<li><a data-act="selectResultLayer" data-arg="shadow" data-toggle="tab" href="https://online.photoscissors.com/558833/rky3Dv6bX/#shadow"><img src="./PhotoScissors Online_files/shadow.svg"></a></li>
+						  </ul>
+
+						  <div class="tab-content">
+							<div id="foreground" class="tab-pane fade in active">
+							  <h4>Foreground</h4>
+							  
+								<div class="form-group">
+								<label for="smoothBoundary">Smooth the Boundary</label>
+								<select class="form-control" id="smoothBoundary" data-layer="mask" data-property="smooth">
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+								</select>
+								</div>
+
+								<div class="form-group">
+								<label for="offsetBoundary">Offset the Boundary</label>
+								<input type="number" min="-10" max="10" class="form-control" id="offsetBoundary" data-layer="mask" data-property="offset">
+								</div>
+							
+								<div class="form-group">
+									<label for="feathering">Feathering</label>
+									<input type="number" min="0" max="10" class="form-control" id="feathering" data-layer="foreground" data-property="feathering">
+								</div>
+
+							</div>
+							
+							<div id="background" class="tab-pane fade">
+							  <h4>Background</h4>
+							  <div class="form-group">
+								<select class="form-control" id="backgroundMode" data-layer="background" data-property="mode">
+									<option value="transparent">Transparent</option>
+									<option value="color">Solid Color</option>
+									<option value="image">Image</option>
+									<option value="original">Original</option>
+								</select>
+								</div>
+
+								<div class="form-group" style="display: none;">
+									<label for="bgColor">Color</label>
+									<input type="color" class="form-control" id="bgColor" data-layer="background" data-property="color">
+								</div>
+
+								<div class="form-group" style="display: none;">
+									<label for="bgImageLoader" class="btn btn-primary btn-block btn-outlined">Select Image</label>
+									<input type="file" class="form-control" id="bgImageLoader" style="display: none">
+									<input type="hidden" class="form-control" id="bgImage" data-layer="background" data-property="image" value="">
+								</div>
+							<!--
+								<div class="form-group">
+								<label for="aspectRatio">Aspect Ratio</label>
+								<select class="form-control" id="aspectRatio">
+									<option value="unconstrained">Unconstrained</option>
+								</select>
+								</div>
+							-->
+							</div>
+							<div id="shadow" class="tab-pane fade">
+							  <h4><input type="checkbox" data-layer="shadow" data-property="enabled" value=""> Shadow</h4>
+							  
+							  <div class="form-group">
+								<label for="shadowOpacity">Opacity</label>
+								<input type="number" min="0" max="100" class="form-control" id="shadowOpacity" data-layer="shadow" data-property="opacity">
+							</div>
+
+								<div class="form-group">
+									<label for="shadowBlurRadius">BlurRadius</label>
+									<input type="number" min="0" max="100" class="form-control" id="shadowBlurRadius" data-layer="shadow" data-property="blurRadius">
+								</div>
+
+								<div class="form-group">
+									<label for="shadowColor">Color</label>
+									<input type="color" class="form-control" id="shadowColor" data-layer="shadow" data-property="color">
+								</div>
+
+							</div>
+						  </div>
+						</div>
+<div id="page-content-wrapper">
+		
+		<nav class="navbar navbar-default navbar-fixed-top unselectable" role="navigation">
+				<div class="container-fluid">
+				
+					<div class="navbar-header"> 	
+						<a class="navbar-brand hidden-xs" href="https://online.photoscissors.com/" title="Go to the home page"><img style="margin-top:-6px; margin-right:5px;" width="32px" src="./PhotoScissors Online_files/photoscissors-icon-128.png"></a>
+					</div>
+		
+					<div id="navbar" class="navbar-btn">
+						<div class="pull-left">
+								<div class="btn-group hidden-sm hidden-md hidden-lg">
+									<a data-act="undo" data-arg="" nohref="1" class="btn btn-default" title="Undo"><img src="./PhotoScissors Online_files/undo.svg"></a>
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										<span class="caret"></span>
+									</button>
+
+									<ul class="dropdown-menu" role="menu">
+										<li><a data-act="redo" data-arg="" nohref="1" class="btn btn-default disabled" tabindex="-1" title="Redo"><img src="./PhotoScissors Online_files/redo.svg">&nbsp;Redo</a></li>
+									</ul>
+								</div>
+								<div class="btn-group hidden-xs">
+										<a data-act="undo" data-arg="" nohref="1" class="btn btn-default" title="Undo"><img src="./PhotoScissors Online_files/undo.svg"></a>
+										<a data-act="redo" data-arg="" nohref="1" class="btn btn-default disabled" title="Redo"><img src="./PhotoScissors Online_files/redo.svg"></a>
+								</div>
+
+								<div class="btn-group" data-toggle="buttons">
+									<a data-act="setType" data-arg="foreground" nohref="1" class="btn btn-default active" title="Foreground">
+										<input type="radio" name="type"> <img src="./PhotoScissors Online_files/green.svg">
+									</a>
+									<a data-act="setType" data-arg="background" nohref="1" class="btn btn-default" title="Background">
+										<input type="radio" name="type"> <img src="./PhotoScissors Online_files/red.svg">
+									</a>
+									<a data-act="setType" data-arg="erase" nohref="1" class="btn btn-default" title="Erase Markings">
+										<input type="radio" name="type"> <img src="./PhotoScissors Online_files/eraser.svg">
+									</a>
+									<a data-act="setType" data-arg="move" nohref="1" class="btn btn-default" title="Move">
+										<input type="radio" name="type"> <img src="./PhotoScissors Online_files/move.svg">
+									</a>
+
+								</div>
+								<!--
+								<div class="btn-group" data-toggle="buttons">
+										<a data-act="setType" data-arg="hair" nohref="1" class="btn btn-default">
+											<input type="radio" name="type"> <img src="/images/editor/yellow.svg"/>
+										</a>
+										<a data-act="setType" data-arg="erase-matting" nohref="1" class="btn btn-default">
+											<input type="radio" name="type"> <img src="/images/editor/eraser.svg"/>
+										</a>
+								</div>
+								-->
+								
+							<div class="btn-group hidden-xs">
+								<a data-act="zoomIn" data-arg="" nohref="1" class="btn btn-default" title="Zoom In"><img src="./PhotoScissors Online_files/zoom-in.svg"></a>
+								<a data-act="zoomOut" data-arg="" nohref="1" class="btn btn-default" title="Zoom Out"><img src="./PhotoScissors Online_files/zoom-out.svg"></a>
+								<a data-act="zoomToOrig" data-arg="" nohref="1" class="btn btn-default " title="Original Size"><img src="./PhotoScissors Online_files/normal-view.svg"></a>
+								<a data-act="zoomToFit" data-arg="" nohref="1" class="btn btn-default " title="Zoom To Fit"><img src="./PhotoScissors Online_files/zoom-to-fit.svg"></a>
+							</div>
+							<div class="btn-group hidden-xs">
+								<input type="range" min="1" max="100" value="30" class="slider" id="markerSize" title="Marker Size">
+							</div>
+						</div>
+						
+						
+						<div class="pull-right">
+							<a nohref="1" class="btn btn-warning hidden-xs" title="Help" data-toggle="modal" data-target="#helpModal"><img src="./PhotoScissors Online_files/help.svg"></a>
+							<a data-act="download" data-arg="" nohref="1" class="btn btn-primary " title="Download"><img src="./PhotoScissors Online_files/save.svg"></a>
+							<a nohref="1" class="btn btn-default" id="menu-toggle" title="Menu"><img src="./PhotoScissors Online_files/menu.svg"></a>
+							<a href="https://online.photoscissors.com/myimages" class="btn btn-danger " title="Close"><img src="./PhotoScissors Online_files/clear.svg"></a>
+						</div>
+					</div>
+				</div>
+			</nav>
+
+<div>
+	<div class="col-xs-6" id="leftSide">
+		<canvas id="leftCanvas" width="557" height="563" style="cursor: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAABb0lEQVRIS8WXLVPDQBCGn5VgsWDRWCxYsGgsDgYHGjSug2stltogwYKktvyGVoZ58zFpjoS5NJfczsTd7rN7t9kPw1dSjoBDYB/YBQ4K1SWwAn6Ab4wvH5P276E0A5wApwXMx6acSIA3LHOoUdrBKcfARQegCxB0hvHZRG4GpxlQUYaQBOPFNfQXnHIJWbQh5R1jtmmwDg4bqet4LfIKnL+poh1SJuWb5+A8ex96JJKvs0q4e2V7CT4Hzny1e56bY7yW4Cdgp6dBX/UVxo2RV6QrX61A5yYCh/xnff1KBL4tarCvUohzC4Efgb0Q1jrYWAr83EEh2NGo4GhXHS25ov1OkQpI3iTGLJlrjOvoTUJtUdk9dKNYA3dVW8yve4y3dgaBsh4N2zCyPlyixhr2PjCm7cPeMJHXIm2PuILrzTX8bZtwSqRpt4G+givbNdjr83VAQK0wGme3WGHcBlgtbVrW5MTm0iaYlrdFW4SuuV8KG2AxR5ADzwAAAABJRU5ErkJggg==&quot;) 15 15, auto;">
+			Your browser does not support the HTML 5 Canvas. 
+		</canvas>
+	</div>
+	<div class="col-xs-6" id="rightSide">
+		<canvas id="rightCanvas" width="557" height="563" style="cursor: default;">
+			Your browser does not support the HTML 5 Canvas. 
+		</canvas>
+	</div>	
+</div>
+
+
+</div>
+</div>
+<div class="modal fade" id="progressDialog" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 id="progressDlgTitle" class="modal-title">Loading...</h4>
+			</div>
+			<div class="modal-body">
+				<div class="progress"> 
+					<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+						<span class="sr-only">100% Complete</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="messageDlg" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 id="messageDlgTitle" class="modal-title"></h4>
+			</div>
+			<div class="modal-body">
+				<p id="messageDlgText"></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="helpModal" class="modal fade" role="dialog" style="display: none;">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+			<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					<h4 id="messageDlgTitle" class="modal-title">PhotoScissors Instructions</h4>
+				</div>
+		<div class="modal-body">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+					
+						<div class="carousel-inner">
+							
+								<div class="item" id="carousel-1">
+									<img class="thumbnail center-block" src="./PhotoScissors Online_files/step2.jpg" alt="Draw some foreground and background">
+									<div class="text-center">
+											<h3>Draw some foreground and background.</h3>
+											<p>All you need to do is highlight some of the foreground and background and our algorithm takes care of details. Say goodbye to the background and save.</p>
+									</div>
+								</div>
+							
+								<div class="item" id="carousel-2">
+									<img class="img-responsive thumbnail center-block" src="./PhotoScissors Online_files/mistake-1.jpg" alt="Draw some foreground and background">
+									<div class="text-center">
+											<h3>Don't Highlight</h3>
+											<p>You do NOT have to carefully select the areas, just make sure that the red (remove) marker touches any colors that you want to become transparent and the green (keep) marker touches any colors that you want to keep.</p>
+											
+									</div>
+								</div>
+							
+								<div class="item active" id="carousel-3">
+									<img class="img-responsive thumbnail center-block" src="./PhotoScissors Online_files/mistake-2.jpg" alt="Draw some foreground and background">
+									<div class="text-center">
+											<h3>Stay Within The Lines</h3>
+											<p>Make sure you stay within the lines of the object you want to cut out. If you mark an area outside of the foreground with a green marker, a part of the background can be cut out as well. Similarly, don't mark red on the foreground.</p>
+									</div>
+								</div>
+						</div>
+
+					  
+						
+					  </div>
+			
+		</div>
+		<div class="modal-footer">
+				<div class="row">
+					<div class="col-xs-6 text-left">
+						<div class="checkbox">
+								<label><input type="checkbox" value="" id="hideHelp">Don't show again</label>
+						</div>
+					</div>
+					<div class="col-xs-6">
+							<div class="btn-group">
+									<button type="button" id="prevHelpBtn" class="btn btn-default" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span> Prev</button>
+									<button type="button" id="nextHelpBtn" class="btn btn-default disabled" href="#myCarousel" data-slide="next">Next<span class="glyphicon glyphicon-chevron-right"></span></button>
+									</div>
+									<button type="button" id="gotItBtn" class="btn btn-primary" data-dismiss="modal">Got It!</button>
+					</div>
+				</div>
+				
+				
+		 
+		</div>
+	  </div>
+  
+	</div>
+  </div>
+
+		<script type="text/javascript" async="" src="./PhotoScissors Online_files/analytics.js.download"></script><script src="./PhotoScissors Online_files/jquery.min.js.download"></script>
+		<script src="./PhotoScissors Online_files/bootstrap.min.js.download"></script>
+		<script src="./PhotoScissors Online_files/canvas-toBlob.js.download"></script>
+		<script src="./PhotoScissors Online_files/FileSaver.min.js.download"></script>
+
+		<script type="application/javascript" src="./PhotoScissors Online_files/eventdispather.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/layer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/rect.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/recttracker.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/layersview.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/scribblelayer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/imagelayer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/backgroundlayer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/foregroundlayer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/shadowlayer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/masklayer.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/undostack.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/model.js.download"></script>
+		<script type="application/javascript" src="./PhotoScissors Online_files/editor.js.download"></script>
+		<script type="application/javascript">
+			function GetIEVersion() {
+				var sAgent = window.navigator.userAgent;
+				var Idx = sAgent.indexOf("MSIE");
+
+				// If IE, return version number.
+				if (Idx > 0) 
+					return parseInt(sAgent.substring(Idx+ 5, sAgent.indexOf(".", Idx)));
+
+				// If IE 11 then look for Updated user agent string.
+				else if (!!navigator.userAgent.match(/Trident\/7\./)) 
+					return 11;
+
+				else
+					return 0; //It is not IE
+			}
+			function updateProgress(progress, caption) {
+				if (typeof caption !== 'undefined') {
+					$('#progressDlgTitle').text(caption);
+				}
+
+				if(progress == 0){
+					$('#progressDialog').modal('show');
+				}else if(progress == 100){
+					$('#progressDialog').modal('hide');
+				}
+			}
+
+			function showMessage(caption, text) {
+				updateProgress(100);
+
+				if (caption) {
+					$('#messageDlgTitle').text(caption);
+				}
+
+				if (caption) {
+					$('#messageDlgText').text(text);
+				}
+
+				$('#messageDlg').modal('show');
+			}
+
+			$(document).ready(function(){
+				if (GetIEVersion() > 0) 
+				{
+					showMessage("Error", "Sorry but Internet Explorer is not supported");
+					return;
+				}
+				
+				document.getElementById('hideHelp').checked = localStorage.getItem("hideHelp") == "true";
+
+				$("#myCarousel").on('slid.bs.carousel', function (ev) {
+					$('#nextHelpBtn').removeClass('disabled');
+					$('#prevHelpBtn').removeClass('disabled');
+					if ($('#carousel-3').hasClass('active')) {
+						$('#gotItBtn').removeClass('hidden');
+						$('#hideHelp').parent().parent().removeClass('hidden');
+						$('#nextHelpBtn').addClass('disabled');
+					}else if($('#carousel-1').hasClass('active')){
+						$('#prevHelpBtn').addClass('disabled');
+					}
+				});
+
+				$('#helpModal').on('hidden.bs.modal', function () {
+					localStorage.setItem('hideHelp', document.getElementById('hideHelp').checked);
+				});
+
+				updateProgress(0, "Loading...");
+				
+				var query = window.location.pathname.split('/');
+
+				var model = new Model(query[1], query[2]);
+				model.modelLoadedEvent.attach(function(){
+					updateProgress(100);
+
+					if(localStorage.getItem("hideHelp") != "true"){
+						$('#helpModal').modal('show');
+					}
+
+					if ($(window).width() < 768) {
+						setTimeout(function(){$("#wrapper").toggleClass("toggled");},500);
+						
+					}
+					window.editor = new Editor(model, 
+						document.getElementById("leftCanvas"), 
+						document.getElementById("rightCanvas"));
+					
+					window.addEventListener('resize', window.editor.fitToContainer, false);
+				});
+			});
+
+			$("#menu-toggle").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+				if($(window).width() >= 768){ 
+					setTimeout(window.editor.fitToContainer, 500);
+				}
+			});
+/*
+			$("#sidebar-wrapper").on('transitionend webkitTransitionEnd oTransitionEnd', function () {
+				if($(window).width() >= 768)
+					window.editor.fitToContainer();
+			});
+			*/
+
+			document.addEventListener('touchstart', function(e) {
+				if(e.touches.length > 1)
+					e.preventDefault();
+			});
+		</script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async="" src="./PhotoScissors Online_files/js"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-110945660-1');
+		</script>
+
+	
+</body></html>
